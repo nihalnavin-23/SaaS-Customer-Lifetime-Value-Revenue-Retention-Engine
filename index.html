@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AURA SaaS Intelligence | Enterprise Retention & CLV Engine</title>
+  <meta name="description" content="Executive decision cockpit for subscription churn diagnosis, dynamic cohort retention, and customer lifetime value optimization.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="brand-section">
+        <div class="brand-logo">A</div>
+        <div class="brand-info">
+          <h1>
+            AURA SaaS Intelligence
+            <span class="brand-badge">Executive Telemetry</span>
+          </h1>
+          <p>Enterprise Customer Lifetime Value & Net Revenue Retention Engine • Portfolio Edition</p>
+        </div>
+      </div>
+
+      <div class="header-status">
+        <div class="live-pill">
+          <span class="live-dot"></span>
+          <span>4,200 Accounts • Synchronized</span>
+        </div>
+        <a href="https://github.com" target="_blank" class="portfolio-link" id="github-link">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          Repository Docs
+        </a>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs-wrapper">
+      <nav class="nav-tabs" aria-label="Dashboard views">
+        <button class="tab-btn active" data-tab="tab-overview">📊 Executive Overview</button>
+        <button class="tab-btn" data-tab="tab-cohort">🧩 Cohort Retention Heatmap</button>
+        <button class="tab-btn" data-tab="tab-waterfall">📈 MRR Waterfall</button>
+        <button class="tab-btn" data-tab="tab-survival">📉 Survival Analysis (KM)</button>
+        <button class="tab-btn" data-tab="tab-simulator">🎯 What-If ROI Simulator</button>
+        <button class="tab-btn" data-tab="tab-watchlist">🚨 At-Risk Watchlist</button>
+      </nav>
+    </div>
+
+    <!-- TAB 1: EXECUTIVE OVERVIEW -->
+    <div id="tab-overview" class="tab-content active">
+      <!-- Top KPIs -->
+      <div class="kpi-grid">
+        <div class="glass-card kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-label">Current ARR</span>
+            <span class="kpi-icon">💰</span>
+          </div>
+          <div class="kpi-value" id="kpi-arr">$25.84M</div>
+          <div class="kpi-footer">
+            <span class="kpi-context">MRR: </span>
+            <span class="kpi-tag-good" id="kpi-mrr">$2.15M</span>
+          </div>
+        </div>
+
+        <div class="glass-card kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-label">Net Revenue Retention (NRR)</span>
+            <span class="kpi-icon">🔄</span>
+          </div>
+          <div class="kpi-value" id="kpi-nrr">97.6%</div>
+          <div class="kpi-footer">
+            <span class="kpi-tag-warn">Below 110% Target</span>
+          </div>
+        </div>
+
+        <div class="glass-card kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-label">Monthly Logo Churn</span>
+            <span class="kpi-icon">📉</span>
+          </div>
+          <div class="kpi-value" id="kpi-churn">3.45%</div>
+          <div class="kpi-footer">
+            <span class="kpi-context">Annualized: </span>
+            <span class="kpi-tag-danger" id="kpi-annual-churn">34.8%</span>
+          </div>
+        </div>
+
+        <div class="glass-card kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-label">LTV to CAC Ratio</span>
+            <span class="kpi-icon">⚖️</span>
+          </div>
+          <div class="kpi-value" id="kpi-ltv-cac">5.07x</div>
+          <div class="kpi-footer">
+            <span class="kpi-tag-good">Healthy (> 3.0x)</span>
+          </div>
+        </div>
+
+        <div class="glass-card kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-label">Avg CLV & Payback</span>
+            <span class="kpi-icon">⏱️</span>
+          </div>
+          <div class="kpi-value" id="kpi-clv">$14.2K</div>
+          <div class="kpi-footer">
+            <span class="kpi-context">Payback: </span>
+            <span class="kpi-tag-good" id="kpi-cac-payback">11.8 mo</span>
+          </div>
+        </div>
+
+        <div class="glass-card kpi-card" style="border-color: rgba(244, 63, 94, 0.4);">
+          <div class="kpi-header">
+            <span class="kpi-label" style="color: var(--accent-rose);">ARR at Imminent Risk</span>
+            <span class="kpi-icon">⚠️</span>
+          </div>
+          <div class="kpi-value" style="color: var(--accent-rose);" id="kpi-at-risk-arr">$3.37M</div>
+          <div class="kpi-footer">
+            <span class="kpi-tag-danger">Health Score &lt; 45</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Strategic Callout Banner -->
+      <div class="insight-banner">
+        <div class="insight-icon">💡</div>
+        <div class="insight-text">
+          <h4>Executive Finding: Revenue Retention Leakage Concentrated in Onboarding Incompletion</h4>
+          <p>
+            While overall unit economics remain sound (LTV:CAC of 5.07x), Net Revenue Retention is depressed at 97.6%. Churn telemetry indicates that 42.8% of account cancellations occur within 90 days of signup, driven primarily by missing API integrations and stalled user onboarding.
+          </p>
+        </div>
+      </div>
+
+      <!-- 2-Column Split: Churn Drivers & Channel Unit Economics -->
+      <div class="split-grid-2">
+        <div class="glass-card">
+          <div class="card-header-bar">
+            <div>
+              <h2>🚨 Primary Churn Root-Causes</h2>
+              <div class="card-subtitle">Categorization from exit telemetry and CS logs</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div id="churn-reasons-container"></div>
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <div class="card-header-bar">
+            <div>
+              <h2>🎯 Channel Acquisition Efficiency</h2>
+              <div class="card-subtitle">Comparing CAC, churn rate, and LTV multiples</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="cohort-table">
+                <thead>
+                  <tr>
+                    <th>Channel</th>
+                    <th>Accounts</th>
+                    <th>Avg CAC</th>
+                    <th>Churn %</th>
+                    <th>LTV:CAC</th>
+                  </tr>
+                </thead>
+                <tbody id="channels-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: COHORT RETENTION HEATMAP -->
+    <div id="tab-cohort" class="tab-content">
+      <div class="glass-card">
+        <div class="card-header-bar">
+          <div>
+            <h2>🧩 Triangular Cohort Retention Matrix (Month 0 to Month 12)</h2>
+            <div class="card-subtitle">% of accounts retained in each subsequent tenure month by signup cohort</div>
+          </div>
+          <div class="pill-filters">
+            <span style="font-size: 12px; color: var(--text-muted);">Scale: </span>
+            <span class="heat-cell heat-90" style="padding: 2px 8px; font-size: 11px;">&gt;85%</span>
+            <span class="heat-cell heat-70" style="padding: 2px 8px; font-size: 11px;">70-85%</span>
+            <span class="heat-cell heat-50" style="padding: 2px 8px; font-size: 11px;">50-70%</span>
+            <span class="heat-cell heat-low" style="padding: 2px 8px; font-size: 11px;">&lt;50%</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div id="cohort-heatmap-container" class="table-responsive"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: MRR WATERFALL -->
+    <div id="tab-waterfall" class="tab-content">
+      <div class="glass-card">
+        <div class="card-header-bar">
+          <div>
+            <h2>📈 Monthly Recurring Revenue (MRR) Decomposition</h2>
+            <div class="card-subtitle">Monthly composition of Base Retained, New, Expansion, and Churned MRR</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div id="waterfall-chart-container"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: SURVIVAL ANALYSIS -->
+    <div id="tab-survival" class="tab-content">
+      <div class="glass-card">
+        <div class="card-header-bar">
+          <div>
+            <h2>📉 Kaplan-Meier Non-Parametric Survival Analysis S(t)</h2>
+            <div class="card-subtitle">Probability of account survival over 24 months with hazard rate estimation</div>
+          </div>
+          <div class="pill-filters">
+            <button class="pill-btn survival-toggle active" data-view="tier">By Tier</button>
+            <button class="pill-btn survival-toggle" data-view="onboarding">By Onboarding</button>
+            <button class="pill-btn survival-toggle" data-view="api">By API Integration</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="chart-container">
+            <svg id="survival-svg" width="100%" height="280"></svg>
+          </div>
+          <div id="survival-takeaway-text" class="insight-banner" style="margin-top: 20px; margin-bottom: 0;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: WHAT-IF SIMULATOR -->
+    <div id="tab-simulator" class="tab-content">
+      <div class="glass-card">
+        <div class="card-header-bar">
+          <div>
+            <h2>🎯 Dynamic What-If Revenue Recovery & Enterprise Valuation Simulator</h2>
+            <div class="card-subtitle">Simulate ROI and compounding enterprise value gains from targeted churn interventions</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="simulator-container">
+            <!-- Sliders -->
+            <div class="simulator-inputs">
+              <div class="slider-group">
+                <div class="slider-header">
+                  <span class="slider-label">Target Monthly Churn Reduction</span>
+                  <span class="slider-value-display" id="sim-churn-val">1.2% pts</span>
+                </div>
+                <input type="range" id="sim-churn-reduction" class="custom-range" min="0.2" max="2.5" step="0.1" value="1.2">
+                <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Reduces baseline monthly churn from 3.45%</div>
+              </div>
+
+              <div class="slider-group">
+                <div class="slider-header">
+                  <span class="slider-label">Onboarding Completion Lift</span>
+                  <span class="slider-value-display" id="sim-onboard-val">+15%</span>
+                </div>
+                <input type="range" id="sim-onboard-lift" class="custom-range" min="5" max="35" step="5" value="15">
+                <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Targeted CS onboarding workshop for mid-market accounts</div>
+              </div>
+
+              <div class="slider-group">
+                <div class="slider-header">
+                  <span class="slider-label">Enterprise Expansion Rate Lift</span>
+                  <span class="slider-value-display" id="sim-expansion-val">+5%</span>
+                </div>
+                <input type="range" id="sim-expansion-lift" class="custom-range" min="2" max="15" step="1" value="5">
+                <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Seat expansion from high-usage accounts</div>
+              </div>
+            </div>
+
+            <!-- Projected Results -->
+            <div class="simulator-result-box">
+              <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--accent-cyan); letter-spacing: 0.05em; margin-bottom: 12px;">
+                Projected Commercial Impact
+              </div>
+
+              <div class="sim-metric-row">
+                <span class="sim-metric-name">Annual Recovered ARR</span>
+                <span class="sim-metric-value sim-metric-highlight" id="sim-recovered-arr">$620K</span>
+              </div>
+
+              <div class="sim-metric-row">
+                <span class="sim-metric-name">Enterprise Valuation Impact (8.0x)</span>
+                <span class="sim-metric-value" style="color: var(--accent-cyan);" id="sim-valuation-impact">$4.96M</span>
+              </div>
+
+              <div class="sim-metric-row">
+                <span class="sim-metric-name">New Adjusted Monthly Churn</span>
+                <span class="sim-metric-value" id="sim-new-churn">2.25% / mo</span>
+              </div>
+
+              <div class="sim-metric-row">
+                <span class="sim-metric-name">Projected LTV:CAC Ratio</span>
+                <span class="sim-metric-value" id="sim-projected-ltv">6.3x</span>
+              </div>
+
+              <div class="sim-metric-row">
+                <span class="sim-metric-name">Annual Accounts Saved</span>
+                <span class="sim-metric-value" id="sim-accounts-saved">58 accounts / yr</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 6: AT-RISK WATCHLIST -->
+    <div id="tab-watchlist" class="tab-content">
+      <div class="glass-card">
+        <div class="card-header-bar">
+          <div>
+            <h2>🚨 High-Value Customer Churn Watchlist</h2>
+            <div class="card-subtitle">Prioritized accounts with low health index (< 45) and high contractual value</div>
+          </div>
+          <input type="text" id="watchlist-search" placeholder="Search company or ID..." style="background: rgba(255,255,255,0.06); border: 1px solid var(--border-subtle); color: #fff; padding: 6px 14px; border-radius: 6px; font-size: 13px; outline: none;">
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="cohort-table">
+              <thead>
+                <tr>
+                  <th>Customer ID</th>
+                  <th>Company Name</th>
+                  <th>Tier</th>
+                  <th>Contract ARR</th>
+                  <th>Health Score</th>
+                  <th>Seat Utilization</th>
+                  <th>Tickets</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="watchlist-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/simulator.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
